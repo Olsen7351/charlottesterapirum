@@ -19,7 +19,7 @@
             scroll-behavior: smooth;
         }
         .hero-bg {
-            background-image: url('backgroundv2.jpeg');
+            background-image: url('background.png');
             background-size: cover;
             background-position: center;
         }
@@ -89,12 +89,12 @@
 
     <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-blue-900">Charlotte M. Ehmsen - Psykoterapeut</a>
+            <a href="#" class="text-xl font-bold text-blue-900">Charlotte Margaretha Ehmsen - Psykoterapeut</a>
             <div class="hidden md:flex items-center space-x-6">
-                <a href="#services" class="text-slate-600 hover:text-blue-600">Ydelser</a>
+                <a href="#services" class="text-slate-600 hover:text-blue-600">Psykoterapi</a>
                 <a href="#about" class="text-slate-600 hover:text-blue-600">Om Mig</a>
                 <a href="#contact" class="text-slate-600 hover:text-blue-600">Kontakt & Priser</a>
-                <a href="mailto:cmehmsen@gmail.com?subject=Booking%20af%20samtale" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors">Book en samtale</a>
+        <button id="open-booking" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors">Book en samtale</button>
             </div>
             <div class="md:hidden">
                 <button id="menu-btn" type="button" class="z-50 block text-blue-900 hover:text-blue-600 focus:outline-none">
@@ -108,32 +108,74 @@
         
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg">
             <div class="flex flex-col items-center py-8 space-y-6">
-                <a href="#services" class="mobile-link text-slate-600 hover:text-blue-600 text-lg">Ydelser</a>
+                <a href="#services" class="mobile-link text-slate-600 hover:text-blue-600 text-lg">Psykoterapi</a>
                 <a href="#about" class="mobile-link text-slate-600 hover:text-blue-600 text-lg">Om Mig</a>
                 <a href="#contact" class="mobile-link text-slate-600 hover:text-blue-600 text-lg">Kontakt & Priser</a>
-                <a href="mailto:cmehmsen@gmail.com?subject=Booking%20af%20samtale" class="mobile-link mt-4 bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">Book en samtale</a>
+        <button id="open-booking-mobile" class="mobile-link mt-4 bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">Book en samtale</button>
             </div>
         </div>
     </header>
 
     <main>
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md relative">
+        <button id="close-booking" class="absolute top-4 right-4 text-slate-400 hover:text-blue-600 text-2xl">&times;</button>
+        <h2 class="text-2xl font-bold mb-4 text-blue-800 text-center">Book en samtale</h2>
+        <form id="booking-form" class="space-y-4">
+          <div>
+            <label class="block mb-1 font-medium" for="booking-name">Navn</label>
+            <input type="text" id="booking-name" name="name" class="w-full border rounded-lg px-3 py-2" placeholder="Valgfrit">
+          </div>
+          <div>
+            <label class="block mb-1 font-medium" for="booking-email">Email</label>
+            <input type="email" id="booking-email" name="email" class="w-full border rounded-lg px-3 py-2" placeholder="Valgfrit">
+          </div>
+          <div>
+            <label class="block mb-1 font-medium" for="booking-phone">Telefonnummer</label>
+            <input type="tel" id="booking-phone" name="phone" class="w-full border rounded-lg px-3 py-2" placeholder="Valgfrit">
+          </div>
+          <div>
+            <label class="block mb-1 font-medium" for="booking-date">Dato</label>
+            <input type="date" id="booking-date" name="date" class="w-full border rounded-lg px-3 py-2" placeholder="Valgfrit">
+          </div>
+          <div>
+            <label class="block mb-1 font-medium" for="booking-time">Tidspunkt</label>
+            <input type="time" id="booking-time" name="time" class="w-full border rounded-lg px-3 py-2" placeholder="Valgfrit">
+          </div>
+          <div>
+            <label class="block mb-1 font-medium" for="booking-length">Varighed</label>
+            <select id="booking-length" name="length" class="w-full border rounded-lg px-3 py-2">
+              <option value="">Vælg varighed (valgfrit)</option>
+              <option value="60 min">60 min (standard)</option>
+              <option value="Andet">Andet</option>
+            </select>
+          </div>
+          <div>
+            <label class="block mb-1 font-medium" for="booking-message">Besked</label>
+            <textarea id="booking-message" name="message" rows="3" class="w-full border rounded-lg px-3 py-2" placeholder="Valgfrit"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-colors">Send</button>
+        </form>
+      </div>
+    </div>
         <section class="hero-bg text-white">
             <div class="bg-black/40 py-24 md:py-32">
                 <div class="container mx-auto px-6 text-center">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Find din vej til indre ro og balance</h1>
-                    <p class="text-lg md:text-xl max-w-3xl mx-auto text-sky-100">I trygge og naturskønne omgivelser i Harlev, nær Aarhus, tilbyder jeg terapeutisk støtte til at navigere livets udfordringer.</p>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Sammen skaber vi klarhed, retning og indre ro</h1>
+                    <p class="text-lg md:text-xl max-w-3xl mx-auto text-sky-100">I trygge naturskønne omgivelser i Hørslev, nær Aarhus, tilbyder jeg terapeutiske samtaler, hvor du får mulighed for at forstå dig selv på et dybere plan – og handle derfra.</p>
                 </div>
             </div>
         </section>
 
         <section id="services" class="py-20 md:py-28 bg-slate-100">
             <div class="container mx-auto px-6">
-                <h2 class="section-title">Psykoterapi og Ydelser</h2>
+                <h2 class="section-title">Psykoterapi</h2>
                 <div class="flex justify-center">
                     <div class="max-w-2xl w-full">
                         <div class="card">
                             <h3 class="text-2xl font-semibold text-blue-800 mb-4 text-center">Individuel Psykoterapi i trygge rammer</h3>
-                            <p class="mb-6">En terapeutisk samtale, hvor vi nysgerrigt udforsker de problematikker, du ønsker at arbejde med. Jeg møder dig, præcis hvor du er i livet. Dette kan være for dig, der er ramt af:</p>
+                            <p class="mb-6">Jeg tilbyder terapeutiske samtaler med afsæt i en oplevelsesorienteret tilgang. Det betyder, at vi arbejder med dine følelser, kropslige fornemmelser og tanker, som de opstår i samtalen. Gennem denne metode støttes du i at blive mere bevidst om dine reaktionsmønstre og følelsesmæssige behov. Jeg bestræber mig på at møde dig med nærvær, empati og faglig klarhed – og skabe et trygt rum, hvor forandring kan opstå.</p>
                             <ul class="space-y-3">
                                 <li class="flex items-center"><svg class="icon-flower" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Stress, angst eller depression</li>
                                 <li class="flex items-center"><svg class="icon-flower" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg> Sorg, krise, tab og livskriser</li>
@@ -153,10 +195,12 @@
                         <img src="https://psykoterapeutisk-praksis.brick.site/media/64d38d3e6127ef832bd1bfc3/w800/DSC09820-2.jpg" alt="Portræt af psykoterapeut Charlotte Margaretha Ehmsen i Harlev, Aarhus" class="rounded-xl shadow-lg w-full">
                     </div>
                     <div class="md:col-span-3">
-                        <h2 class="section-title text-center md:text-left">Om Mig - Din Terapeut</h2>
-                        <p class="mb-4">Jeg er 48 år, oprindeligt uddannet socialrådgiver, og har i mange år arbejdet med mennesker ramt af livet. I dag bor jeg på landet i Harlev nær Aarhus med min mand og vores tre teenagebørn.</p>
-                        <p class="mb-4">Min faglige baggrund er solidt forankret i uddannelser fra Psykoterapeutisk Institut i Aarhus og Institut for Dybdeterapi. Jeg er psykodynamisk orienteret, hvilket betyder, at vi sammen udforsker, hvordan tidligere erfaringer kan påvirke dig i dag, for at skabe varig forandring og trivsel.</p>
-                        <p class="font-semibold text-blue-800">Mit mål er at skabe et trygt og tillidsfuldt rum, hvor du kan føle dig set, hørt og forstået på din rejse mod personlig udvikling.</p>
+                        <h2 class="section-title text-center md:text-left">Om Mig</h2>
+                        <p class="mb-4">Jeg er oprindeligt uddannet socialrådgiver og har i mange år arbejdet med mennesker ramt af livet. I dag bor jeg på landet i Hørslev nær Aarhus med min mand og vores tre teenagebørn.</p>
+                        <p class="mb-4">Min faglige baggrund er solidt forankret i uddannelser fra Psykoterapeutisk Institut i Aarhus og Institut for Dybdeterapi. Jeg har diverse kurser indenfor angst, depression, stressbelastning, PTSD, selvskade, sundhed og forandret virkelighedsopfattelse.</p>
+                        <p class="mb-4">Jeg er psykodynamisk orienteret, hvilket betyder, at vi sammen udforsker, hvordan tidligere erfaringer kan påvirke dig i dag, for at skabe varig forandring og trivsel. Jeg er optaget af, at forstå og arbejde med de ubevidste processer og dynamikker, der påvirker menneskers adfærd og følelser. Jeg tror på, at tidligere erfaringer og relationer har stor indflydelse på, hvordan vi agere i nutiden.</p>
+                        <p class="mb-4">Jeg er passioneret omkring mit arbejde og ønsker at støtte og guide mine klienter på deres rejse mod personlig udvikling og trivsel.</p>
+                        <p class="mb-4">Mit mål er at skabe et trygt og tillidsfuldt rum, hvor du kan føle dig set, hørt og forstået på din rejse mod personlig udvikling.</p>
                     </div>
                 </div>
             </div>
@@ -169,9 +213,9 @@
                     <div class="card">
                         <h3 class="text-2xl font-semibold text-blue-800 mb-4">Prisliste for Terapi</h3>
                         <ul class="space-y-4 text-lg">
-                            <li class="flex flex-col sm:flex-row justify-between border-b pb-2"><span>Individuel samtale (60 min)</span> <strong>850 kr.</strong></li>
-                            <li class="flex flex-col sm:flex-row justify-between border-b pb-2"><span>Unge under 25 år</span> <strong>600 kr.</strong></li>
-                            <li class="flex flex-col sm:flex-row justify-between border-b pb-2"><span>Studerende</span> <strong>600 kr.</strong></li>
+                            <li class="flex flex-col sm:flex-row justify-between border-b pb-2"><span>Individuel samtale (60 min)</span> <span>850 kr.</span></li>
+                            <li class="flex flex-col sm:flex-row justify-between border-b pb-2"><span>Unge under 25 år</span> <span>600 kr.</span></li>
+                            <li class="flex flex-col sm:flex-row justify-between border-b pb-2"><span>Studerende</span> <span>600 kr.</span></li>
                         </ul>
                         <div class="mt-8 bg-sky-100 p-4 rounded-lg">
                             <h4 class="font-semibold text-blue-900">Betaling & Afbud</h4>
@@ -199,6 +243,49 @@
     </footer>
 
     <script>
+        // Booking modal logic
+        const bookingModal = document.getElementById('booking-modal');
+        const openBookingBtn = document.getElementById('open-booking');
+        const openBookingMobileBtn = document.getElementById('open-booking-mobile');
+        const closeBookingBtn = document.getElementById('close-booking');
+        const bookingForm = document.getElementById('booking-form');
+
+        function openBookingModal() {
+          bookingModal.classList.remove('hidden');
+        }
+        function closeBookingModal() {
+          bookingModal.classList.add('hidden');
+        }
+        if (openBookingBtn) openBookingBtn.addEventListener('click', openBookingModal);
+        if (openBookingMobileBtn) openBookingMobileBtn.addEventListener('click', openBookingModal);
+        if (closeBookingBtn) closeBookingBtn.addEventListener('click', closeBookingModal);
+        bookingModal.addEventListener('click', function(e) {
+          if (e.target === bookingModal) closeBookingModal();
+        });
+
+        if (bookingForm) bookingForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const name = document.getElementById('booking-name').value;
+          const email = document.getElementById('booking-email').value;
+          const phone = document.getElementById('booking-phone').value;
+          const length = document.getElementById('booking-length').value;
+          const date = document.getElementById('booking-date').value;
+          const time = document.getElementById('booking-time').value;
+          const message = document.getElementById('booking-message').value;
+          const subject = encodeURIComponent('Booking af samtale');
+          let body = '';
+          if (name) body += `Navn: ${name}%0A`;
+          if (email) body += `Email: ${email}%0A`;
+          if (phone) body += `Telefonnummer: ${phone}%0A`;
+          if (length) body += `Varighed: ${length}%0A`;
+          if (date) body += `Dato: ${date}%0A`;
+          if (time) body += `Tidspunkt: ${time}%0A`;
+          if (message) body += `Besked: ${encodeURIComponent(message)}%0A`;
+          if (!body) body = 'Ingen oplysninger udfyldt.';
+          const mailto = `mailto:cmehmsen@gmail.com?subject=${subject}&body=${body}`;
+          window.location.href = mailto;
+          closeBookingModal();
+        });
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const openIcon = document.getElementById('menu-open-icon');
